@@ -1,0 +1,7 @@
+sircd -- simple irc daemon
+==========================
+
+Pure POSIX c99
+Adheres to RFC 1459
+Licensed under GPL v3+
+Only listens on a UNIX socket; use a forwarding process (with your vetting of choice) to access the interwebs.
