@@ -1,7 +1,14 @@
 sircd -- simple irc daemon
 ==========================
 
-Pure POSIX c99
-Adheres to RFC 1459
+- Pure POSIX c99
+- Adheres to RFC 1459
+- Configuration is done by editing config.h and recompiling
+- Logs to stdout
+- UNIX sockets only
+
 Licensed under GPL v3+
-Only listens on a UNIX socket; use a forwarding process (with your vetting of choice) to access the interwebs.
+
+Caveats:
+You need to use a forwarding process to access the interwebs; this allows you to fine tune connection and Security Through Obscurity
+Currently only supports server <-> client
