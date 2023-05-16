@@ -1,8 +1,9 @@
 #include "net.h"
+#include "config.h"
 
 #include <string.h>
-#include <sys/socket.h>
 #include <unistd.h>
+#include <sys/socket.h>
 
 int
 net_init_sock(
@@ -54,6 +55,5 @@ net_recv(int fd, char* buff) {
 
 void
 net_close_sock(int fd) {
-  close(fd);
-  unlink(SOCKET_PATH);
+  close(fd); 
 }

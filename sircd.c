@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
 #include <string.h>
 #include <pthread.h>
 
@@ -10,6 +11,7 @@
 void ax(void) {
   printf("Closing...\n");
   pthread_exit(NULL);
+  unlink(SOCKET_PATH);
 }
 
 int main (void) { 
@@ -35,7 +37,7 @@ int main (void) {
     info.fd = c;
     strncpy(info.buff, buff, sizeof buff);
  
-    pthread_create(&tid, NULL, irc_handle, (void*)&info); 
+    pthread_create(&tid, NULL, irc_handshake, (void*)&info); 
   }
 
   net_close_sock(fd); 

@@ -1,5 +1,3 @@
-#include "config.h"
-
 #include <sys/un.h>
 
 int net_init_sock(int fd, struct sockaddr_un* addr);
