@@ -23,14 +23,14 @@ net_init_sock(
   // bind socket
   if (bind(
         fd, (struct sockaddr *) addr, 
-        sizeof(struct sockaddr_un)
-        == -1))
+        sizeof(struct sockaddr_un))
+        == -1)
       return -1;
  
   // mark as recv socket
   if (listen(fd, QUEUE_LEN) == -1)
     return -1;
-  
+ 
   return 0;
 }
 
