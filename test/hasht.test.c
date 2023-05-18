@@ -3,28 +3,28 @@
 #include <string.h>
 #include <assert.h>
 
-#include "hasht.h"
+#include "../hasht.h"
 
 int
 main(void) {
   struct hasht* ht = hasht_create(1);
 
-  if (ht == NULL)
-    printf("could not make hasht\n");
-  
+  assert(ht != NULL);
+ 
   int* iv = (int*) malloc(sizeof(int));
   assert(iv != NULL);
   *iv = 5; 
 
-  if ( hasht_set(ht, "ab", iv) == -1 )
-    printf("could not set\n");
+  assert(hasht_set(ht, "ab", iv) != -1); 
   
   int* v = hasht_get(ht, "ab");
-  if ( v == NULL )
-    printf("could not get\n");
+  assert(v != NULL);
 
-  printf("set %s, got %d\n", "ab", *v);
+  assert(*iv == *v);
 
   hasht_destroy(ht);
+
+  printf("All tests passed!\n");
+
   return 0;
 }
