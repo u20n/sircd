@@ -18,8 +18,7 @@ struct server {
   struct hasht* channels[IRC_MAX_CHANNELS];
 };
 
-void* irc_handshake(void* client);
-void irc_handle(struct client* c);
+void* irc_handle(void* client);
 
 void irc_broadcast(
     struct server* s, 

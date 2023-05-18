@@ -26,9 +26,7 @@ int main (void) {
 
   pthread_t tid;
 
-  while (1) {
-    char buff[MAX_BUFF_LEN + 1];
-    
+  while (1) { 
     net_await(fd); // await new connections
     int c = accept(fd, NULL, NULL);  // accept 
     
@@ -36,10 +34,8 @@ int main (void) {
       printf("Could not accept client\n");
       continue;
     }
-    struct client info = {.fd=c};
-    strncpy(info.buff, buff, sizeof buff);
- 
-    pthread_create(&tid, NULL, irc_handshake, (void*)&info); 
+    struct client info = {.fd=c}; 
+    pthread_create(&tid, NULL, irc_handle, (void*)&info); 
   }
 
   net_close_sock(fd); 

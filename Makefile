@@ -1,7 +1,7 @@
 default: build
 
 build:
-	c99 net.c irc.c sircd.c -o sircd
+	c99 net.c hasht.c irc.c sircd.c -o sircd
 	chmod +x sircd
 
 install: build
