@@ -10,5 +10,9 @@ sircd -- simple irc daemon
 Licensed under GPL v3+
 
 Caveats:
-You need to use a forwarding process to access the interwebs; this allows you to fine tune connection and Security Through Obscurity
+You need to use a forwarding process to access the interwebs, allowing you to fine tune access
 Currently only supports server <-> client
+The hash table implementation uses SipHash-2-4[1][2], alternative hash functions can be done by changing `hash_key`
+
+[1]: <https://en.wikipedia.org/wiki/SipHash>
+[2]: <https://github.com/veorq/SipHash/blob/master/siphash.c>

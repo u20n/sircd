@@ -1,4 +1,5 @@
 #include "config.h"
+#include "hasht.h"
 
 struct client {
   int fd;
@@ -10,11 +11,11 @@ struct client {
 
 struct channel {
   char* name;
-  struct client* online[IRC_MAX_CLIENTS];
+  struct hasht* online;
 };
 
 struct server { 
-  struct channel* channels[IRC_MAX_CHANNELS];
+  struct hasht* channels[IRC_MAX_CHANNELS];
 };
 
 void* irc_handshake(void* client);

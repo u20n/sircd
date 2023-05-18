@@ -3,7 +3,9 @@
 
 #include <string.h>
 #include <unistd.h>
-#include <sys/socket.h>
+#include <stdlib.h>
+#include <poll.h>
+#include <errno.h>
 
 int
 net_init_sock(
@@ -39,18 +41,29 @@ net_send(int cfd, const char* msg) {
   return send(cfd, msg, strlen(msg), 0); 
 }
 
-int
-net_recv(int fd, char* buff) {
-  // accept off fd's queue
-  int c = accept(fd, NULL, NULL);
-  if (c == -1)
-    return -1;
-  
-  // read until EOF or MAX_BUFF_LEN 
-  int l = recv(c, buff, MAX_BUFF_LEN, 0);
-  buff[l] = '\0'; // finish off str
+void
+net_await(int fd) {
+  struct pollfd pfd = {.fd=fd, .events=POLLIN};
+  int pass = 0;
+  while (!pass) {
+    int p = poll(&pfd, 1, -1);
+    if (p < 0)
+      exit(1);
+    if (pfd.revents == (EAGAIN | ENOMEM))
+      continue;
+    pass = 1;
+  }
+}
 
-  return c;
+int
+net_recv(int fd, char* buff) {   
+  // read until EOF or MAX_BUFF_LEN 
+  int l = recv(fd, buff, MAX_BUFF_LEN, 0);
+  if (l == -1)
+    return l;
+  
+  buff[l] = '\0'; // finish off str
+  return 0;
 }
 
 void
