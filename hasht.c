@@ -6,8 +6,8 @@
 
 int
 _probe(struct hasht* t, const char* k) { 
-  uint64_t h = hash_key(k);
-  unsigned int i = (unsigned int)(h & (uint64_t)(t->cap - 1));
+  uint64_t* h = hash(k, strlen(k)); 
+  unsigned int i = (unsigned int)(*h & (uint64_t)(t->cap - 1));
 
   while (t->e[i].key != NULL) { // only examine occupied entries 
     if (t->cap <= i)
@@ -17,6 +17,7 @@ _probe(struct hasht* t, const char* k) {
       return i;
     i++;
   }
+  free(h);
   return i; // not found --> next available space
 }
 
@@ -92,15 +93,4 @@ hasht_set(struct hasht* t, const char* k, void* v) {
  
   _set_entry(t, k, v, &t->len);
   return 0;
-}
-
-
-// FIXME placeholder FNV-1a until SipHash
-static uint64_t hash_key(const char* key) {
-  uint64_t hash = 14695981039346656037UL;
-  for (const char* c = key; *c; c++) {
-    hash ^= (uint64_t)(unsigned char)(*c);
-    hash *= 1099511628211UL;
-  }
-  return hash;
 }

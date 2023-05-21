@@ -12,7 +12,9 @@ Licensed under GPL v3+
 Caveats:
 You need to use a forwarding process to access the interwebs, allowing you to fine tune access
 Currently only supports server <-> client
-The hash table implementation uses SipHash-2-4[1][2], alternative hash functions can be done by changing `hash_key`
 
-[1]: <https://en.wikipedia.org/wiki/SipHash>
+The hash table implementation currently uses FNV 1a, which can allow for hash-flooding
+Eventually, sircd will use SipHash-2-4-64[1][2]
+
+[1]: <https://www.aumasson.jp/siphash/siphash.pdf>
 [2]: <https://github.com/veorq/SipHash/blob/master/siphash.c>

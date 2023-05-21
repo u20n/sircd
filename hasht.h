@@ -19,7 +19,7 @@ void hasht_destroy(struct hasht* ht);
 void* hasht_get(struct hasht* ht, const char* key);
 int hasht_set(struct hasht* ht, const char* key, void* value);
 
-static uint64_t hash_key(const char* key);
+uint64_t* hash(const char* str, unsigned int len);
 
 #define hasht_def
 #endif
